@@ -1,0 +1,26 @@
+sudo: required
+
+language: bash
+install: true
+services:
+  - docker
+
+before_install:
+  - docker --version
+  - echo "ENV GIT_SHA ${TRAVIS_COMMIT}" >> Dockerfile
+
+install:
+  - docker build -t ososystem/keycloak:${TRAVIS_COMMIT} .
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ososystem/keycloak:${TRAVIS_COMMIT}
+  - docker tag ososystem/keycloak:${TRAVIS_COMMIT} ososystem/keycloak:latest
+  - docker push ososystem/keycloak:latest
+  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+after_failure:
+  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
