@@ -1,4 +1,6 @@
 # <img src="https://user-images.githubusercontent.com/19901781/46945965-8cb21700-d076-11e8-8c82-95af6b7388b3.png" width="80" height="80"> OSO Keycloak Auth
+[![Build Status](https://travis-ci.com/OSOSystem/oso-keycloak-auth.svg?branch=develop)](https://travis-ci.com/OSOSystem/oso-keycloak-auth)
+
 This repository contains everything related to the Keycloak image we are using.
 
 >The image can be found under<br>
