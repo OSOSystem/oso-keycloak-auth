@@ -1,9 +1,9 @@
 #!/bin/bash
 
-VERSION=4.5.0.Final
+VERSION=4.8.1.Final
 BIN_FOLDER=keycloak-${VERSION}/bin
 HOST=localhost
-PORT=8180
+PORT=8080
 
 ADMIN_USER=admin
 ADMIN_PASSWORD=nimda
@@ -42,7 +42,7 @@ echo "Creating realm named ${REALM}"
 ${BIN_FOLDER}/kcadm.sh create realms -s realm=${REALM} -s enabled=true
 
 echo "Creating client"
-${BIN_FOLDER}/kcadm.sh create clients -r ${REALM} -s clientId=login-app -s 'redirectUris=["http://localhost:8080/*"]'
+${BIN_FOLDER}/kcadm.sh create clients -r ${REALM} -s clientId=login-app -s 'redirectUris=["*"]'
 
 echo "Creating user role"
 ${BIN_FOLDER}/kcadm.sh create roles -r ${REALM} -s name=user
